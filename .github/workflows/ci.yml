@@ -1,0 +1,32 @@
+name: Experimental Environment CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Start Docker Compose environment
+        run: docker compose up -d
+
+      - name: Wait for services to start
+        run: sleep 60
+
+      - name: Check Juice Shop
+        run: curl -I http://localhost:3000
+
+      - name: Check DVWA
+        run: curl -I http://localhost:8080
+
+      - name: Check WebGoat
+        run: curl -I http://localhost:8081/WebGoat
+
+      - name: Check SonarQube
+        run: curl -I http://localhost:9000
