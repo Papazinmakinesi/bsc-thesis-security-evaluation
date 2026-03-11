@@ -52,3 +52,13 @@ jobs:
           fail_action: false
           cmd_options: '-a'
 
+
+      - name: Upload ZAP Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-security-reports
+          path: |
+            report_html.html
+            report_md.md
+            report_json.json
+
