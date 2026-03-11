@@ -30,3 +30,11 @@ jobs:
 
       - name: Check SonarQube
         run: curl -I http://localhost:9000
+
+      - name: OWASP ZAP Baseline Scan (Juice Shop)
+        uses: zaproxy/action-baseline@v0.10.0
+        with:
+          target: 'http://localhost:3000'
+          fail_action: false
+          cmd_options: '-a'
+
